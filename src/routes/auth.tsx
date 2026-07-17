@@ -33,7 +33,7 @@ function AuthPage() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [coordinate, setCoordinate] = useState<string | null>(null);
-  const navigate = useNavigate();
+  
   const validateHandshake = useServerFn(sandboxHandshake);
   const fetchCoordinate = useServerFn(sandboxCurrentCoordinate);
 
