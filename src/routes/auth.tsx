@@ -26,6 +26,8 @@ export const Route = createFileRoute("/auth")({
 
 const schema = z.object({ email: z.string().trim().email().max(255) });
 
+const EXTERNAL_PORTAL_URL = "http://treetripacinghexagoenneapasing.statesflowwishes.eu/";
+
 function AuthPage() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
