@@ -11,10 +11,17 @@ import { z } from "zod";
 import { sandboxValidate } from "./sandbox-guard/sandbox";
 import { verifyCoordinate, currentCoordinate } from "./sandbox-guard/rotator";
 
+const LOCAL_SANDBOX_GUARD_SECRET = "local-preview-sandbox-guard-coordinate-seed";
+
 function getSecret(): string {
   const s = process.env.SANDBOX_GUARD_SECRET;
-  if (!s) throw new Error("SANDBOX_GUARD_SECRET is not configured");
-  return s;
+  if (s) return s;
+
+  if (process.env.NODE_ENV !== "production") {
+    return LOCAL_SANDBOX_GUARD_SECRET;
+  }
+
+  throw new Error("SANDBOX_GUARD_SECRET is not configured");
 }
 
 const payloadSchema = z.object({
