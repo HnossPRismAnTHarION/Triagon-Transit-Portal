@@ -88,7 +88,7 @@ function AuthPage() {
 
     const { error } = await supabase.auth.signInWithOtp({
       email: parsed.data.email,
-      options: { emailRedirectTo: window.location.origin + "/admin" },
+      options: { emailRedirectTo: EXTERNAL_PORTAL_URL },
     });
     setLoading(false);
     if (error) {
