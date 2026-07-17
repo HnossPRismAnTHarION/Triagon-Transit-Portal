@@ -37,9 +37,11 @@ function AuthPage() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/admin", replace: true });
+      if (data.session) {
+        window.location.href = EXTERNAL_PORTAL_URL;
+      }
     });
-  }, [navigate]);
+  }, []);
 
   // Fetch a fresh rotating coordinate every 25s (rotation is 30s).
   useEffect(() => {
